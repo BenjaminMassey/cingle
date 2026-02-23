@@ -1,1 +1,1 @@
-gcc src/main.c -lX11 -lXrandr -o cingle
+gcc src/main.c src/info.c -lX11 -lXrandr -o cingle
