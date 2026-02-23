@@ -1,10 +1,15 @@
 #ifndef XLIB_INPUT_H
 #define XLIB_INPUT_H
 
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
+
 #include "types.h"
 
-Pixels GetMonitorResolution(Display* display, XRRScreenResources* screen, int index);
+Pixels GetMonitorResolution(Display *display, XRRScreenResources *screen,
+                            int index);
 
-XImage* GetCenterSection(Display* display, Window root, Pixels resolution, Pixels size);
+XImage *GetCenterSection(Display *display, Window root, Pixels resolution,
+                         Pixels size);
 
 #endif

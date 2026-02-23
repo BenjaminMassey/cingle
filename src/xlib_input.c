@@ -3,9 +3,11 @@
 
 #include "xlib_input.h"
 
-Pixels GetMonitorResolution(Display* display, XRRScreenResources* screen, int index) {
+Pixels GetMonitorResolution(Display *display, XRRScreenResources *screen,
+                            int index) {
 
-  XRROutputInfo *output = XRRGetOutputInfo(display, screen, screen->outputs[index]);
+  XRROutputInfo *output =
+      XRRGetOutputInfo(display, screen, screen->outputs[index]);
 
   int width = 0;
   int height = 0;
@@ -17,10 +19,11 @@ Pixels GetMonitorResolution(Display* display, XRRScreenResources* screen, int in
   }
   XRRFreeOutputInfo(output);
 
-  return (Pixels){ .x = width, .y = height };
+  return (Pixels){.x = width, .y = height};
 }
 
-XImage* GetCenterSection(Display* display, Window root, Pixels resolution, Pixels size) {
+XImage *GetCenterSection(Display *display, Window root, Pixels resolution,
+                         Pixels size) {
   int x = (resolution.x - size.x) * 0.5;
   int y = (resolution.y - size.y) * 0.5;
   return XGetImage(display, root, x, y, size.x, size.y, AllPlanes, ZPixmap);
