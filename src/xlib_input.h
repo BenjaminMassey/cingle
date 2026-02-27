@@ -7,7 +7,7 @@
 #include "types.h"
 
 Pixels GetMonitorResolution(Display *display, XRRScreenResources *screen,
-                            int index);
+                            Window root);
 
 XImage *GetCenterSection(Display *display, Window root, Pixels resolution,
                          Pixels size);

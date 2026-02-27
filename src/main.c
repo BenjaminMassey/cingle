@@ -22,7 +22,7 @@ int main() {
   Window root = DefaultRootWindow(display);
   XRRScreenResources *screen = XRRGetScreenResourcesCurrent(display, root);
 
-  Pixels resolution = GetMonitorResolution(display, screen, 0);
+  Pixels resolution = GetMonitorResolution(display, screen, root);
   if (resolution.x < 1 || resolution.y < 1) {
     printf("got improper monitor resolution\n");
     return 1;

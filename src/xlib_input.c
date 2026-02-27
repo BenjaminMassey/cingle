@@ -1,22 +1,29 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
+#include <stdio.h>
 
 #include "xlib_input.h"
 
 Pixels GetMonitorResolution(Display *display, XRRScreenResources *screen,
-                            int index) {
+                            Window root) {
 
-  XRROutputInfo *output =
-      XRRGetOutputInfo(display, screen, screen->outputs[index]);
-
-  int width = 0;
-  int height = 0;
-  if (output->connection == RR_Connected && output->crtc) {
-    XRRCrtcInfo *crtc = XRRGetCrtcInfo(display, screen, output->crtc);
-    width = crtc->width;
-    height = crtc->height;
-    XRRFreeCrtcInfo(crtc);
+  RROutput primary = XRRGetOutputPrimary(display, root);
+  if (!primary) {
+    printf("failed to get primary monitor\n");
+    return (Pixels){.x = 0, .y = 0};
   }
+
+  XRROutputInfo *output = XRRGetOutputInfo(display, screen, primary);
+  if (output->connection != RR_Connected || !output->crtc) {
+    printf("primary monitor is not connected or has no crtc\n");
+    XRRFreeOutputInfo(output);
+    return (Pixels){.x = 0, .y = 0};
+  }
+
+  XRRCrtcInfo *crtc = XRRGetCrtcInfo(display, screen, output->crtc);
+  int width = crtc->width;
+  int height = crtc->height;
+  XRRFreeCrtcInfo(crtc);
   XRRFreeOutputInfo(output);
 
   return (Pixels){.x = width, .y = height};
