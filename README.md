@@ -8,10 +8,11 @@ Currently only supporting X11 environments in Linux (tested under Debian).
 
 ## Usage
 
-`setup.sh` should bring in the necessary libraries for apt-based distros
-
-`build.sh` will build the project into the executable `cingle` file
-
+`make` has targets:
+- `install`: apt install dependecies
+- `build`: compile project into binary
+- `run`: run built binary
+- `clean`: delete built binary
 
 ## Credit
 
