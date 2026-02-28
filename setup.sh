@@ -1,1 +1,1 @@
-sudo apt install build-essential libx11-dev libxrandr-dev
+sudo apt install build-essential libxcb1-dev libxcb-randr0-dev
